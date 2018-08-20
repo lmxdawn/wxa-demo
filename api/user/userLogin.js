@@ -49,7 +49,7 @@ const login = function () {
                         wx.getSetting({
                             success: (res) => {
                                 if (!res.authSetting["scope.userInfo"]) {//没授权
-                                    showModal('提示', '猜猜兔需要获取用户的权限,点击确定前往设置,打开用户信息', true, function (res) {
+                                    showModal('提示', '需要获取用户的权限,点击确定前往设置,打开用户信息', true, function (res) {
                                         wx.openSetting({
                                             success: (res) => {
                                                 // 用户返回 不管是否开启 接着去重新登录

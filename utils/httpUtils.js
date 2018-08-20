@@ -33,8 +33,8 @@ const request = function (path, method, data, header) {
             }
         });
     });
-}
+};
 
 module.exports = {
     request,
-}
+};
