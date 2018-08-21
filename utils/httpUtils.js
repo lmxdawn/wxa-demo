@@ -22,8 +22,8 @@ const request = function (path, method, data, header) {
             method: method,
             data: data,
             success: function (res) {
-                if (res.code) {
-                    reject(res.data)
+                if (res.statusCode !== 200) {
+                    reject("网络繁忙，请稍后~")
                 } else {
                     resolve(res.data)
                 }
