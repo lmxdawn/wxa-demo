@@ -5,7 +5,7 @@
 const ENV = 'production';
 
 // 接口基础域名
-const API_BASE_URL = ENV === 'production' ? "http://dcyduq.natappfree.cc/shiguangji/public/index.php" : "";
+const API_BASE_URL = ENV === 'production' ? "http://www.demo.com" : "";
 const FROM = 1;
 const IMG_URL = ENV === 'production' ? "http://img.demo.com" : "";
 const IMG_VERSION = ""; // 图片资源版本
