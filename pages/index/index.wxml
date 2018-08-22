@@ -1,12 +1,11 @@
-<!--index.wxml-->
 <view class="container">
     <view class="userinfo">
         <block>
-            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.user_name}}</text>
         </block>
     </view>
     <view class="usermotto">
-        <button bindgetuserinfo="wxGetUserInfo" open-type="getUserInfo">重新登录</button>
+        <button bindgetuserinfo="getUserInfo" open-type="getUserInfo">获取用户信息</button>
     </view>
 </view>

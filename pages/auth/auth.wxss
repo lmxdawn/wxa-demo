@@ -1,0 +1,9 @@
+/**index.wxss**/
+.auth-button {
+  display: block;
+  width: 150px;
+  margin: 100px auto auto;
+  color: #fff;
+  background-color: #67c23a;
+  border-color: #67c23a;
+}

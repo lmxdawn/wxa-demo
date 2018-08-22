@@ -4,8 +4,8 @@
 // 环境模式（production：生产环境，development：测试）
 const ENV = 'production';
 
-// 接口基础域名/*http://dcyduq.natappfree.cc/shiguangji/public/index.php/api/day_time/index*/
-const API_BASE_URL = ENV === 'production' ? "http://www.demo.com" : "";
+// 接口基础域名
+const API_BASE_URL = ENV === 'production' ? "http://dcyduq.natappfree.cc/shiguangji/public/index.php" : "";
 const FROM = 1;
 const IMG_URL = ENV === 'production' ? "http://img.demo.com" : "";
 const IMG_VERSION = ""; // 图片资源版本
