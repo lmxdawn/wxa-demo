@@ -5,7 +5,12 @@
             <text class="userinfo-nickname">{{userInfo.user_name}}</text>
         </block>
     </view>
-    <view class="usermotto">
-        <button bindgetuserinfo="getUserInfo" open-type="getUserInfo">获取用户信息</button>
+    <view class="footer">
+        <view class="usermotto">
+            <view class="list {{ isShow ? 'list-show' : '' }}">
+
+            </view>
+            <button bindgetuserinfo="getUserInfo" open-type="getUserInfo">获取用户信息</button>
+        </view>
     </view>
 </view>

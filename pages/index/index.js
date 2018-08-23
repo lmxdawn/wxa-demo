@@ -7,6 +7,7 @@ let self = undefined;
 Page({
     data: {
         userInfo: {},
+        isShow: false
     },
     onLoad: function () {
         self = this;
@@ -14,6 +15,9 @@ Page({
 
     getUserInfo: function () {
         console.log(app.globalData.userInfo);
+        self.setData({
+            isShow: !self.data.isShow
+        });
         if (app.globalData.userInfo) {
             self.setData({
                 userInfo: app.globalData.userInfo
