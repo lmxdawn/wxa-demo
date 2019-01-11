@@ -14,9 +14,10 @@ Page({
     data: {
         i: 0,
         j: 0,
-        num: 3,
+        num: 4,
         width: 300,
-        imageList: []
+        imageList: [],
+        newImageList: [] // 排序好了的数组
     },
 
     onLoad: function () {
@@ -29,7 +30,8 @@ Page({
         this.setData({
             i: 0,
             j: 0,
-            imageList: []
+            imageList: [],
+            newImageList: []
         });
 
         const ctx = wx.createCanvasContext('canvasIn', this);
@@ -76,7 +78,7 @@ Page({
             this.setData({
                 i: 0,
                 j: 0,
-                imageList: list
+                newImageList: list
             });
             return false;
         }
@@ -89,8 +91,6 @@ Page({
         var x = i * w;
         var y = j * w;
         console.log(i,j);
-
-        j++;
 
         const cfg = {
             x: x,
@@ -112,14 +112,18 @@ Page({
                 }
                 var data = {
                     imagePath: res.tempFilePath,
-                    count: parseInt("" + i + j)
+                    count: parseInt("" + j + i)
                 };
                 list.push(data);
+
+                // 修改数据
+                j++;
                 self.setData({
                     i: i,
                     j: j,
                     imageList: list
                 });
+                
                 // 递归执行
                 this.export();
                 // wx.saveImageToPhotosAlbum({
