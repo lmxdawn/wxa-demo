@@ -1,10 +1,15 @@
 <view class="container">
 
-    <canvas canvas-id="canvasIn" style="" class="canvas"></canvas>
-    <canvas canvas-id="canvasOut" style="width: 40px;height: 40px;" class="canvas"></canvas>
+    <canvas canvas-id="canvasIn" style="width: 300px;height: 300px;" class="canvas"></canvas>
+
     <button bindtap="openAndDraw">打开图片并绘制</button>
 
-    <button bindtap="process">处理图像</button>
     <button bindtap="export">导出画布至图片</button>
+
+    <view style="width: 300px;height: 300px;">
+        <block wx:for="{{imageList}}">
+            <image style="width: 75px;height: 75px;" src="{{item.imagePath}}" mode="cover"></image>
+        </block>
+    </view>
 
 </view>

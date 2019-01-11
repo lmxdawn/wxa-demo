@@ -1,12 +1,22 @@
 
 var self = null;
 var num1 = 0;
+
+function compare(property){
+    return function(a,b){
+        var value1 = a[property];
+        var value2 = b[property];
+        return value1 - value2;
+    }
+}
+
 Page({
     data: {
         i: 0,
         j: 0,
-        num: 4,
-        width: 300
+        num: 3,
+        width: 300,
+        imageList: []
     },
 
     onLoad: function () {
@@ -14,9 +24,21 @@ Page({
     },
 
     openAndDraw() {
+
+        // 清空数据
+        this.setData({
+            i: 0,
+            j: 0,
+            imageList: []
+        });
+
         const ctx = wx.createCanvasContext('canvasIn', this);
-        ctx.drawImage("http://localhost/643353_sdfaf123.png", 0, 0);
-        ctx.draw()
+        wx.chooseImage({
+            success(res) {
+                ctx.drawImage(res.tempFilePaths[0], 0, 0, 300, 300);
+                ctx.draw()
+            }
+        })
     },
 
     export() {
@@ -24,6 +46,7 @@ Page({
         var i = this.data.i;
         var j = this.data.j;
         var num = this.data.num;
+        var count = this.data.count;
         var width = this.data.width;
 
         var w = parseInt(width / num);
@@ -34,46 +57,87 @@ Page({
 
         if (i === num - 1 && j >= num) {
             console.log("结束");
+            var list = [];
+            // 这里可以重新排序
+            for (var index in self.data.imageList) {
+                var data = {
+                    imagePath: null,
+                    count: null
+                };
+                data.imagePath = self.data.imageList[index].imagePath;
+                data.count = self.data.imageList[index].count;
+                list.push(data);
+            }
+
+            list.sort(compare('count'));
+
+            console.log(list);
+
+            this.setData({
+                i: 0,
+                j: 0,
+                imageList: list
+            });
             return false;
         }
 
-        if (j > num) {
+        if (j > num - 1) {
             i++;
             j = 0;
         }
 
         var x = i * w;
         var y = j * w;
+        console.log(i,j);
 
         j++;
-        this.setData({
-            i: i,
-            j: j
-        });
 
         const cfg = {
-            x: 0,
-            y: 0,
+            x: x,
+            y: y,
             width: w,
             height: w,
         };
-
         wx.canvasToTempFilePath({
             canvasId: 'canvasIn',
             ...cfg,
             success: (res) => {
-                console.log(res);
-                wx.saveImageToPhotosAlbum({
-                    filePath: res.tempFilePath,
-                    success: (res) => {
-                        this.export();
-                    },
-                    fail: (err) => {
-                        console.error(err)
-                    }
-                })
+                var list = [];
+                for (var index in self.data.imageList) {
+                    var data = {
+                        imagePath: self.data.imageList[index].imagePath,
+                        count: self.data.imageList[index].count
+                    };
+                    list.push(data);
+                }
+                var data = {
+                    imagePath: res.tempFilePath,
+                    count: parseInt("" + i + j)
+                };
+                list.push(data);
+                self.setData({
+                    i: i,
+                    j: j,
+                    imageList: list
+                });
+                // 递归执行
+                this.export();
+                // wx.saveImageToPhotosAlbum({
+                //     filePath: res.tempFilePath,
+                //     success: (res) => {
+                //         this.export();
+                //     },
+                //     fail: (err) => {
+                //         console.error(err)
+                //     }
+                // })
             },
             fail: (err) => {
+                this.setData({
+                    i: 0,
+                    j: 0,
+                    imageList: []
+                });
                 console.log(err);
             }
         }, this);
