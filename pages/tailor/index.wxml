@@ -6,9 +6,10 @@
 
     <button bindtap="export">导出画布至图片</button>
 
-    <view style="width: 300px;height: 300px;">
-        <block wx:for="{{imageList}}">
-            <image style="width: 75px;height: 75px;" src="{{item.imagePath}}" mode="cover"></image>
+    <!-- 这里因为给每个图片加了 border, 容器 宽高也根据切割的图片个数来 -->
+    <view style="width: {{width + num * 2}}px;height: {{width + num * 2}}px;">
+        <block wx:for="{{newImageList}}">
+            <image style="width: 75px;height: 75px;vertical-align:bottom;border:1px solid red;" src="{{item.imagePath}}" mode="cover"></image>
         </block>
     </view>
 
