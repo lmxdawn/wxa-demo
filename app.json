@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/auth/auth"
+    "pages/auth/auth",
+    "pages/tailor/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
